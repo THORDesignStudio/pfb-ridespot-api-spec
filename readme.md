@@ -55,14 +55,14 @@ Three new pieces of information need to be included with each ride to make this 
 
 The following is an outline of what THOR would expect from the Ridespot team for a set of REST-based endpoints.
 
-| Endpoint | READ | WRITE | Request | Desc
+| Endpoint | READ | WRITE | Request | Description
 |----------|:--------:|:--------:|:--------:|--------|
 | /data/ridespot/v1/ride/{id} | yes | no | GET | Returns single ride based on ride ID
-| /data/ridespot/v1/ridesLatest | yes | no | GET | Returns latest n number of rides on platform
-| /data/ridespot/v1/ridesEC | yes | no | GET | Returns latest n number of Editor's Choice rides
+| /data/ridespot/v1/ridesLatest | yes | no | GET | Returns latest 20 rides on platform
+| /data/ridespot/v1/ridesEC | yes | no | GET | Returns latest 20 Editor's Choice rides
 | /data/ridespot/v1/ridesByState/{state} | yes | no | GET | Returns 20 most viewed rides for a state
 | /data/ridespot/v1/collection/{name} | yes | no | GET | Returns 20 most viewed rides for a collection
-| /data/ridespot/v1/collectionEC/{name} | yes | no | GET | Returns up to 20 Editor's Choice rides for a collection
+| /data/ridespot/v1/collectionEC/{name} | yes | no | GET | Returns 20 most viewed, Editor's Choice rides for a collection
 | /data/ridespot/v1/collections | yes | no | GET | Returns an array of all collection names
 
 The endpoints map to the views needed on the main PFB site and Keep Riding campaign sites, but the endpoints are flexible enough to be repurposed by other applications in the future.
@@ -182,27 +182,19 @@ Schema:
 Response example :
 TBD
 
-### Rides By State
+### Latest Rides
 
-Description: Return a JSON object of the ten most viewed rides for each state
+Description: Return a JSON object of the twenty latest rides added to the system
 
-Endpoint: `/data/ridespot/v1/rideByState/{state}` 
+Endpoint: `/data/ridespot/v1/ridesLatest` 
 
-Parameters:
-
-| Name | Type | Description
-|----------|:--------:|:--------:|
-| state | string | This is the full text name of the state (ie, `Texas`). Ideally endpoint should accept USPS abbreviation code (ie, `TX`) |
+Parameters: None
 
 Schema:
 
 ```
 {
-  "total": int (should always be 10),
-  "state": {
-    "full": string,
-    "abbreviation": string
-  },
+  "total": int (should always be 20),
   "rides": [
     {
       "title": string,
@@ -275,7 +267,101 @@ Schema:
       "collections": [ string ],
       "ecRide": boolean
     },
-    {},
+    ...
+  ]
+}
+````
+
+Response example :
+TBD
+
+
+### Editor's Choice Rides
+
+Description: Return a JSON object of the twenty latest Editor's Choice rides
+
+Endpoint: `/data/ridespot/v1/ridesEC` 
+
+Parameters: None
+
+Schema:
+
+```
+{
+  "total": int (should always be 20),
+  "rides": [
+    {
+      "title": string,
+      "city": string,
+      "state": string,
+      "stateAbbreviation": string,
+      "country": string,
+      "story": [
+        {
+          "type": "paragraph",
+          "text": string
+        },
+        {
+          "type": "image",
+          "url": string,
+          "alt": string,
+          "caption": string,
+          "license": string,
+          "dimensions: {
+            "width": int,
+            "height": int
+          }
+        }
+      ],
+      "date": string,
+      "url": string,
+      "organization" : {
+        "name": string,
+        "url": string
+      },
+      "coordinates": {
+        "latitude": float,
+        "longitude": float
+      },
+      "distance": {
+        "miles": float,
+        "kilometers": float
+      },
+      "rideType": string
+      "rideCardImage": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }
+      },
+      "qrCode": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }
+      },    
+      "featuredImage": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }    
+      },
+      "collections": [ string ],
+      "ecRide": boolean
+    },
+    ...
   ]
 }
 ````
@@ -285,7 +371,7 @@ TBD
 
 ### Rides By State
 
-Description: Return a JSON object of the ten most viewed rides for each state
+Description: Return a JSON object of the 20 most viewed rides for each state
 
 Endpoint: `/data/ridespot/v1/rideByState/{state}` 
 
@@ -299,7 +385,7 @@ Schema:
 
 ```
 {
-  "total": int (should always be 10),
+  "total": int (should always be 20),
   "state": {
     "full": string,
     "abbreviation": string
@@ -376,7 +462,226 @@ Schema:
       "collections": [ string ],
       "ecRide": boolean
     },
-    {},
+    ...
+  ]
+}
+````
+
+Response example :
+TBD
+
+### Collection
+
+Description: Return a JSON object of the twenty most viewed rides associated with a collection
+
+Endpoint: `/data/ridespot/v1/collection/{name}` 
+
+Parameters:
+
+| Name | Type | Description
+|----------|:--------:|:--------:|
+| name | string | This is the full text name of the collection (ie, `Adventure`). |
+
+Schema:
+
+```
+{
+  "total": int (should always be 20),
+  "collection": string,
+  "rides": [
+    {
+      "title": string,
+      "city": string,
+      "state": string,
+      "stateAbbreviation": string,
+      "country": string,
+      "story": [
+        {
+          "type": "paragraph",
+          "text": string
+        },
+        {
+          "type": "image",
+          "url": string,
+          "alt": string,
+          "caption": string,
+          "license": string,
+          "dimensions: {
+            "width": int,
+            "height": int
+          }
+        }
+      ],
+      "date": string,
+      "url": string,
+      "organization" : {
+        "name": string,
+        "url": string
+      },
+      "coordinates": {
+        "latitude": float,
+        "longitude": float
+      },
+      "distance": {
+        "miles": float,
+        "kilometers": float
+      },
+      "rideType": string
+      "rideCardImage": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }
+      },
+      "qrCode": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }
+      },    
+      "featuredImage": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }    
+      },
+      "collections": [ string ],
+      "ecRide": boolean
+    },
+    ...
+  ]
+}
+````
+
+Response example :
+TBD
+
+
+### Editor's Choice Collection
+
+Description: Return a JSON object of the twenty latest, Editor's Choice rides associated with a collection
+
+Endpoint: `/data/ridespot/v1/collectionEC/{name}` 
+
+Parameters:
+
+| Name | Type | Description
+|----------|:--------:|:--------:|
+| name | string | This is the full text name of the collection (ie, `Adventure`). |
+
+Schema:
+
+```
+{
+  "total": int (should always be 20),
+  "collection": string,
+  "rides": [
+    {
+      "title": string,
+      "city": string,
+      "state": string,
+      "stateAbbreviation": string,
+      "country": string,
+      "story": [
+        {
+          "type": "paragraph",
+          "text": string
+        },
+        {
+          "type": "image",
+          "url": string,
+          "alt": string,
+          "caption": string,
+          "license": string,
+          "dimensions: {
+            "width": int,
+            "height": int
+          }
+        }
+      ],
+      "date": string,
+      "url": string,
+      "organization" : {
+        "name": string,
+        "url": string
+      },
+      "coordinates": {
+        "latitude": float,
+        "longitude": float
+      },
+      "distance": {
+        "miles": float,
+        "kilometers": float
+      },
+      "rideType": string
+      "rideCardImage": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }
+      },
+      "qrCode": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }
+      },    
+      "featuredImage": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }    
+      },
+      "collections": [ string ],
+      "ecRide": boolean
+    },
+    ...
+  ]
+}
+````
+
+Response example :
+TBD
+
+
+### Editor's Choice Collection
+
+Description: Return a JSON object of the twenty latest, Editor's Choice rides associated with a collection
+
+Endpoint: `/data/ridespot/v1/collections` 
+
+Parameters: None
+
+Schema:
+
+```
+{
+  "collections": [
+    string, string, ...
   ]
 }
 ````
@@ -394,7 +699,7 @@ PFB uses a mix of technologies to power its many websites. The flagship [main si
 - Authentication is handled with [Auth0's passwordless infrastructure](https://auth0.com/passwordless), search utilitizes [Algolia](https://www.algolia.com), and payments provider [Stripe](https://www.stripe.com) handles payments.
 - PFB also has campaign websites that utilize [Wix](https://www.wix.com/), [Shopify](https://www.shopify.com/), and [Webflow](https://webflow.com/) when appropriate. 
 
-While the technical stack that powers Ridespot is not entirely known to our team, **it is expected that the forthcoming public Ridespot API will make its data available either using well-documented, legacy REST-based endpoints or new, self-documenting GraphQL endpoints.**
+While the technical stack that powers Ridespot is not entirely known to our team, **it is expected that the forthcoming public Ridespot API will make its data available either using well-documented, legacy REST-based endpoints (outlined above) or new, self-documenting GraphQL endpoints.**
 
 ## Contribute
 This is an RFC, which means any comments would be appreciated. This is a living document and needs your input to be finished!
