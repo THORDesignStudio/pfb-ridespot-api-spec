@@ -10,14 +10,15 @@ Currently, Ridespot does not directly integrate with any other PFB properties an
 
 The current PeopleForBikes main website has two areas with Ridespot data needs:
 
-- Homepage 'Rides' block: (https://www.peopleforbikes.org/)
-- Location Pages 'Rides' block: (sample: https://www.peopleforbikes.org/locations/colorado)
+- Homepage 'Rides' block: https://www.peopleforbikes.org/
+- Location Pages 'Rides' block, sample: https://www.peopleforbikes.org/locations/colorado
+- 'Featured Rides' page: https://www.peopleforbikes.org/rides
 
 The 'Keep Riding' site is built around Ridespot rides, with the 'Routes' section outlining categories for riding:
 
 - https://www.pfbkeepriding.org/ride-collections
 
-All three points of integration are doing the same thing, more or less: showing users rides from Ridespot.
+All points of integration are doing the same thing, more or less: showing users rides from Ridespot.
 
 ## Data
 
@@ -54,13 +55,15 @@ Three new pieces of information need to be included with each ride to make this 
 
 The following is an outline of what THOR would expect from the Ridespot team for a set of REST-based endpoints.
 
-| Endpoint | READ | WRITE | Request
-|----------|:--------:|:--------:|:--------:|
-| /data/ridespot/v1/ride/{id} | yes | no | GET |
-| /data/ridespot/v1/ride-by-state/{state} | yes | no | GET |
-| /data/ridespot/v1/collection/{id} | yes | no | GET |
-| /data/ridespot/v1/collection-ec/{id} | yes | no | GET |
-| /data/ridespot/v1/collections | yes | no | GET |
+| Endpoint | READ | WRITE | Request | Desc
+|----------|:--------:|:--------:|:--------:|:--------:|
+| /data/ridespot/v1/ride/{id} | yes | no | GET | Returns single ride based on ride ID
+| /data/ridespot/v1/ridesLatest | yes | no | GET | Returns latest n number of rides on platform
+| /data/ridespot/v1/ridesEC | yes | no | GET | Returns latest n number of Editor's Choice rides
+| /data/ridespot/v1/ridesByState/{state} | yes | no | GET | Returns 20 most viewed rides for a state
+| /data/ridespot/v1/collection/{name} | yes | no | GET | Returns 20 most viewed rides for a collection
+| /data/ridespot/v1/collectionEC/{name} | yes | no | GET | Returns up to 20 Editor's Choice rides for a collection
+| /data/ridespot/v1/collections | yes | no | GET | Returns an array of all collection names
 
 The endpoints map to the views needed on the main PFB site and Keep Riding campaign sites, but the endpoints are flexible enough to be repurposed by other applications in the future.
 
@@ -173,6 +176,208 @@ Schema:
     "collections": [ string ],
     "ecRide": boolean
   }
+}
+````
+
+Response example :
+TBD
+
+### Rides By State
+
+Description: Return a JSON object of the ten most viewed rides for each state
+
+Endpoint: `/data/ridespot/v1/rideByState/{state}` 
+
+Parameters:
+
+| Name | Type | Description
+|----------|:--------:|:--------:|
+| state | string | This is the full text name of the state (ie, `Texas`). Ideally endpoint should accept USPS abbreviation code (ie, `TX`) |
+
+Schema:
+
+```
+{
+  "total": int (should always be 10),
+  "state": {
+    "full": string,
+    "abbreviation": string
+  },
+  "rides": [
+    {
+      "title": string,
+      "city": string,
+      "state": string,
+      "stateAbbreviation": string,
+      "country": string,
+      "story": [
+        {
+          "type": "paragraph",
+          "text": string
+        },
+        {
+          "type": "image",
+          "url": string,
+          "alt": string,
+          "caption": string,
+          "license": string,
+          "dimensions: {
+            "width": int,
+            "height": int
+          }
+        }
+      ],
+      "date": string,
+      "url": string,
+      "organization" : {
+        "name": string,
+        "url": string
+      },
+      "coordinates": {
+        "latitude": float,
+        "longitude": float
+      },
+      "distance": {
+        "miles": float,
+        "kilometers": float
+      },
+      "rideType": string
+      "rideCardImage": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }
+      },
+      "qrCode": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }
+      },    
+      "featuredImage": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }    
+      },
+      "collections": [ string ],
+      "ecRide": boolean
+    },
+    {},
+  ]
+}
+````
+
+Response example :
+TBD
+
+### Rides By State
+
+Description: Return a JSON object of the ten most viewed rides for each state
+
+Endpoint: `/data/ridespot/v1/rideByState/{state}` 
+
+Parameters:
+
+| Name | Type | Description
+|----------|:--------:|:--------:|
+| state | string | This is the full text name of the state (ie, `Texas`). Ideally endpoint should accept USPS abbreviation code (ie, `TX`) |
+
+Schema:
+
+```
+{
+  "total": int (should always be 10),
+  "state": {
+    "full": string,
+    "abbreviation": string
+  },
+  "rides": [
+    {
+      "title": string,
+      "city": string,
+      "state": string,
+      "stateAbbreviation": string,
+      "country": string,
+      "story": [
+        {
+          "type": "paragraph",
+          "text": string
+        },
+        {
+          "type": "image",
+          "url": string,
+          "alt": string,
+          "caption": string,
+          "license": string,
+          "dimensions: {
+            "width": int,
+            "height": int
+          }
+        }
+      ],
+      "date": string,
+      "url": string,
+      "organization" : {
+        "name": string,
+        "url": string
+      },
+      "coordinates": {
+        "latitude": float,
+        "longitude": float
+      },
+      "distance": {
+        "miles": float,
+        "kilometers": float
+      },
+      "rideType": string
+      "rideCardImage": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }
+      },
+      "qrCode": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }
+      },    
+      "featuredImage": {
+        "url": string,
+        "alt": string,
+        "caption": string,
+        "license": string,
+        "dimensions: {
+          "width": int,
+          "height": int
+        }    
+      },
+      "collections": [ string ],
+      "ecRide": boolean
+    },
+    {},
+  ]
 }
 ````
 
