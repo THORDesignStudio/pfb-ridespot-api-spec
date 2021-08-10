@@ -22,7 +22,7 @@ All points of integration are doing the same thing, more or less: **showing user
 
 ## Data
 
-For each ride, we need to following information to be made available from Ridespot:
+For each ride, we need the following information to be made available from Ridespot:
 
 - Title
 - City
