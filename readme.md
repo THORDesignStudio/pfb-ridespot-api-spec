@@ -8,7 +8,7 @@ Currently, Ridespot does not directly integrate with any other PFB properties an
 
 ## High Level
 
-The current PeopleForBikes main website has two areas with Ridespot data needs:
+The current PeopleForBikes main website has three areas with Ridespot data needs:
 
 - Homepage 'Rides' block: https://www.peopleforbikes.org/
 - Location Pages 'Rides' block, sample: https://www.peopleforbikes.org/locations/colorado
@@ -18,7 +18,7 @@ The 'Keep Riding' site is built around Ridespot rides, with the 'Routes' section
 
 - https://www.pfbkeepriding.org/ride-collections
 
-All points of integration are doing the same thing, more or less: showing users rides from Ridespot.
+All points of integration are doing the same thing, more or less: **showing users rides from Ridespot**.
 
 ## Data
 
