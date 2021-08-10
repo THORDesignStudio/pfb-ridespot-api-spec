@@ -668,9 +668,9 @@ Response example :
 TBD
 
 
-### Editor's Choice Collection
+### Collections
 
-Description: Return a JSON object of the twenty latest, Editor's Choice rides associated with a collection
+Description: Return a JSON object of all collections used to categories rides on Ridespot
 
 Endpoint: `/data/ridespot/v1/collections` 
 
