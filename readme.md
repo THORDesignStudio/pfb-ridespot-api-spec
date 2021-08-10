@@ -4,7 +4,7 @@ RFC for how to extend the [Ridespot](https://www.ridespot.org) website/API to su
 ## Description
 A long term goal for PFB is to create more consumer-facing experiences that encourages general riders to explore new rides. One of the major tools the organization is using to accomplish this goal is [Ridespot](https://www.ridespot.org), a mobile application that allows users to share exciting rides and creates cue cards for other riders. 
 
-Currently, Ridespot does not directly integrate with any other PFB properties and has poor usability for web-based visitors. The Ridespot team has asked for guidance on the data needs for integration with the other wed-based PFB properties, so this RFC serves as a starting point in that conversation. This document outlines the baseline data needs to integrate Ridespot and PFB's main site and the 'Keep Riding' campaign, with an eye towards using Ridespot data in new applications in the future.
+Currently, Ridespot does not directly integrate with any other PFB properties and has poor usability for web-based visitors. The Ridespot team has asked for guidance on the data needs for integration with the other web-based PFB properties, so this RFC serves as a starting point in that conversation. This document outlines the baseline data needs to integrate Ridespot and PFB's main site and the 'Keep Riding' campaign, with an eye towards using Ridespot data in new applications in the future.
 
 ## High Level
 
