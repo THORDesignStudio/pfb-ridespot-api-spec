@@ -45,8 +45,8 @@ For each ride, we need to following information to be made available from Ridesp
 Three new pieces of information need to be included with each ride to make this concept a reality:
 
 - **Featured Image** (we recommend a common aspect ratio like: 5:4 or 4:3, with the backend service sizing the image appropriately). Serving properly sized images is very hard to do correctly and THOR recommends the Ridespot team use something like [imgix](https://imgix.com/) as part of their software stack to mitigate the effort.
-- Collection(s) - these are the categories from the PFB 'Keep Riding' campaign. See the collections on [https://www.pfbkeepriding.org/ride-collections](https://www.pfbkeepriding.org/ride-collections). **Please Note** these have not been finalized by the PFB editorial team.
-- Editors Choice - this is an option for Ridespot administrators to indicate a ride is of exceptional quality. 
+- **Collection(s)** - these are the categories from the PFB 'Keep Riding' campaign. See the collections on [https://www.pfbkeepriding.org/ride-collections](https://www.pfbkeepriding.org/ride-collections). **Please Note** these have not been finalized by the PFB editorial team.
+- **Editors Choice** - this is an option for Ridespot administrators to indicate a ride is of exceptional quality. 
 
 **There probably needs to be enhancements to the Ridespot administrative dashboard to do batch collection and editor choice metadata modifications. This would be an excellent place to get feedback from the Ridespot team on how to procede.**
 
