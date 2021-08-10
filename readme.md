@@ -56,7 +56,7 @@ Three new pieces of information need to be included with each ride to make this 
 The following is an outline of what THOR would expect from the Ridespot team for a set of REST-based endpoints.
 
 | Endpoint | READ | WRITE | Request | Desc
-|----------|:--------:|:--------:|:--------:|:--------:|
+|----------|:--------:|:--------:|:--------:|--------|
 | /data/ridespot/v1/ride/{id} | yes | no | GET | Returns single ride based on ride ID
 | /data/ridespot/v1/ridesLatest | yes | no | GET | Returns latest n number of rides on platform
 | /data/ridespot/v1/ridesEC | yes | no | GET | Returns latest n number of Editor's Choice rides
