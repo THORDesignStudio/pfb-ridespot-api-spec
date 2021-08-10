@@ -1,4 +1,4 @@
-# PeopleForBikes Ridespot Integration Specification 
+# PeopleForBikes Ridespot Integration RFC
 RFC for how to extend the [Ridespot](https://www.ridespot.org) website/API to support the needs of the [PeopleForBikes' main website](https://www.peopleforbikes.org) and other properties like [PFB Keep Riding](https://www.pfbkeepriding.org/)
 
 ## Description
